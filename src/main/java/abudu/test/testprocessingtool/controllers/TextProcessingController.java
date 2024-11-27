@@ -4,11 +4,7 @@ import abudu.test.testprocessingtool.models.TextProcessor;
 import abudu.test.testprocessingtool.models.RegexProcessor;
 import abudu.test.testprocessingtool.services.RegexService;
 import abudu.test.testprocessingtool.utils.RegexValidator;
-import kotlin.text.Regex;
 
-import java.util.Arrays;
-
-import static abudu.test.testprocessingtool.controllers.RegexProcessingController.getString;
 
 /**
  * TextProcessingController handles user interactions and delegates operations
@@ -35,9 +31,10 @@ public class TextProcessingController {
         if (!RegexValidator.isValidRegex(regex)) {
             return "Invalid regex pattern.";
         }
-        return textProcessor.search(text, regex);
+        String[] matches = textProcessor.search(text, regex).split("\n");
+        int count = matches.length;
+        return "Search: " + regex + ", Occurrences: " + count;
     }
-
 
     public String handleReplace(String text, String regex, String replacement) {
         if (!RegexValidator.isValidRegex(regex)) {

@@ -1,6 +1,7 @@
 package abudu.test.testprocessingtool.services;
 
 import abudu.test.testprocessingtool.models.DataItem;
+import abudu.test.testprocessingtool.utils.AlertUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,41 +13,33 @@ import java.util.Optional;
  */
 public class DataManagementService {
 
-    private final List<DataItem> dataItems; // Collection of data items
+    private final List<DataItem> dataItems;
+
 
     /**
      * Constructor initializes the data collection.
      */
     public DataManagementService() {
         this.dataItems = new ArrayList<>();
+
     }
 
-    /**
-     * Adds a new DataItem to the collection.
-     *
-     * @param item The DataItem to add.
-     * @return
-     * @throws IllegalArgumentException if an item with the same ID already exists.
-     */
+
     public boolean addDataItem(DataItem item) {
         if (findById(item.getId()).isPresent()) {
-            throw new IllegalArgumentException("An item with the same ID already exists.");
+            AlertUtility.showErrorAlert("Error", "Item already exists.", "Please provide a unique item ID.");
+            return false;
         }
         dataItems.add(item);
         return false;
     }
 
-    /**
-     * Updates an existing DataItem in the collection.
-     *
-     * @param item The updated DataItem.
-     * @return
-     * @throws IllegalArgumentException if the item does not exist.
-     */
+
     public boolean updateDataItem(DataItem item) {
         Optional<DataItem> existingItem = findById(item.getId());
         if (existingItem.isEmpty()) {
-            throw new IllegalArgumentException("No item found with the specified ID.");
+            AlertUtility.showErrorAlert("Error", "Item not found or update failed.", "Please check the item ID and try again.");
+            return false;
         }
         existingItem.get().setName(item.getName());
         existingItem.get().setValue(item.getValue());
@@ -62,7 +55,8 @@ public class DataManagementService {
     public boolean deleteDataItem(String id) {
         Optional<DataItem> item = findById(id);
         if (item.isEmpty()) {
-            throw new IllegalArgumentException("No item found with the specified ID.");
+            AlertUtility.showErrorAlert("Error", "Item not found or delete failed.", "Please check the item ID and try again.");
+            return false;
         }
         dataItems.remove(item.get());
         return false;

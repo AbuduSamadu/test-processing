@@ -3,6 +3,7 @@ package abudu.test.testprocessingtool.controllers;
 import abudu.test.testprocessingtool.models.DataItem;
 import abudu.test.testprocessingtool.services.DataManagementService;
 import abudu.test.testprocessingtool.utils.AlertUtility;
+import abudu.test.testprocessingtool.utils.CollectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller for managing data items using JavaFX.
@@ -157,9 +159,58 @@ public class DataManagementController {
     /**
      * Clears all input fields.
      */
+    @FXML
     private void clearFields() {
         itemIdField.clear();
         itemNameField.clear();
         itemValueField.clear();
+    }
+
+    /**
+     * Filters data items by keyword.
+     */
+    @FXML
+    public void handleFilterByKeyword() {
+        String keyword = itemNameField.getText();
+        List<DataItem> filteredItems = CollectionManager.filterByKeyword(observableDataList, keyword);
+        dataTable.setItems(FXCollections.observableArrayList(filteredItems));
+    }
+
+    /**
+     * Sorts data items by name.
+     */
+    @FXML
+    public void handleSortByName() {
+        boolean ascending = true; // or false for descending
+        List<DataItem> sortedItems = CollectionManager.sortByName(observableDataList, ascending);
+        dataTable.setItems(FXCollections.observableArrayList(sortedItems));
+    }
+
+    /**
+     * Groups data items by value.
+     */
+    @FXML
+    public void handleGroupByValue() {
+        Map<String, List<DataItem>> groupedItems = CollectionManager.groupByValue(observableDataList);
+        // Process the grouped items as needed
+    }
+
+    /**
+     * Finds duplicate data items by ID.
+     */
+    @FXML
+    public void handleFindDuplicates() {
+        List<DataItem> duplicates = CollectionManager.findDuplicatesById(observableDataList);
+        dataTable.setItems(FXCollections.observableArrayList(duplicates));
+    }
+
+    /**
+     * Removes data items by value.
+     */
+    @FXML
+    public void handleRemoveByValue() {
+        String value = itemValueField.getText();
+        List<DataItem> updatedItems = CollectionManager.removeByValue(observableDataList, value);
+        observableDataList.setAll(updatedItems);
     }
 }

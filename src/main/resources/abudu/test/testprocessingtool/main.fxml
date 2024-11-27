@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+
+<?import javafx.scene.text.TextFlow?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="abudu.test.testprocessingtool.controllers.MainController"
             stylesheets="@styles/main.css">
     <!-- Root container -->
@@ -20,8 +22,14 @@
         <!-- Title -->
         <Label fx:id="titleLabel" text="Text Processing Tool" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
 
-        <!-- Text Input Area -->
-        <TextArea fx:id="textAreaInput" promptText="Enter your text here..." wrapText="true" prefHeight="150" />
+        <!-- Text Input Area with Import Button -->
+        <VBox spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Button text="Import" onAction="#handleImport" />
+            </HBox>
+            <TextArea fx:id="textAreaInput"  promptText="Enter your text here..." wrapText="true" prefHeight="150" />
+            <TextFlow fx:id="textFlowOutput" prefHeight="150" />
+        </VBox>
 
         <!-- Regex Pattern Input -->
         <VBox spacing="10">

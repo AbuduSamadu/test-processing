@@ -1,8 +1,17 @@
 package abudu.test.testprocessingtool.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class MainController {
@@ -11,6 +20,8 @@ public class MainController {
 
 
     public TextField regexReplacerField;
+    public ToggleButton toggleButton;
+    public Label titleLabel;
     @FXML
     private TextArea textAreaInput;
 
@@ -68,5 +79,23 @@ public class MainController {
         textAreaInput.clear();
         regexPatternField.clear();
         textAreaOutput.clear();
+    }
+
+
+    @FXML
+    private void handleToggle() {
+        if (toggleButton.isSelected()) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/abudu/test/testprocessingtool/dashboard.fxml"));
+                Stage stage = (Stage) toggleButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Data Management Dashboard");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            titleLabel.setText("Text Processing Tool");
+            toggleButton.setText("Switch to Data Management Tool");
+        }
     }
 }

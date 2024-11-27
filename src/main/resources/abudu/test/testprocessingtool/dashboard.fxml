@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="abudu.test.testprocessingtool.controllers.DataManagementController">
+    <!-- Top Section: Title -->
+    <top>
+        <Label text="Data Management Tool" style="-fx-font-size: 20px; -fx-font-weight: bold;" alignment="CENTER" />
+    </top>
+
+    <!-- Center Section: Data Table -->
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <TableView fx:id="dataTable" prefHeight="300" prefWidth="500">
+                <columns>
+                    <TableColumn fx:id="idColumn" text="ID" />
+                    <TableColumn fx:id="nameColumn" text="Name" />
+                    <TableColumn fx:id="valueColumn" text="Value" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- Bottom Section: Controls -->
+    <bottom>
+        <VBox spacing="10" alignment="CENTER" >
+            <GridPane hgap="10" vgap="10" alignment="CENTER">
+                <Label text="ID:" />
+                <TextField fx:id="idField" GridPane.columnIndex="1" />
+
+                <Label text="Name:" GridPane.rowIndex="1" />
+                <TextField fx:id="nameField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <Label text="Value:" GridPane.rowIndex="2" />
+                <TextField fx:id="valueField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            </GridPane>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Add" fx:id="addItemButton" onAction="#handleAddItem" />
+                <Button text="Update" fx:id="updateItemButton" onAction="#handleUpdateItem" />
+                <Button text="Delete" fx:id="deleteItemButton" onAction="#handleDeleteItem" />
+                <Button text="Clear" fx:id="clear"  />
+            </HBox>
+        </VBox>
+    </bottom>
+
+
+</BorderPane>

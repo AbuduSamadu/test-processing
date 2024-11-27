@@ -2,7 +2,6 @@ package abudu.test.testprocessingtool.controllers;
 
 import abudu.test.testprocessingtool.models.RegexProcessor;
 import abudu.test.testprocessingtool.utils.RegexValidator;
-import javafx.event.ActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;

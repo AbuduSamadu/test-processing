@@ -10,7 +10,10 @@ module abudu.test.testprocessingtool {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.logging;
 
     opens abudu.test.testprocessingtool to javafx.fxml;
+    opens abudu.test.testprocessingtool.controllers to javafx.fxml;
     exports abudu.test.testprocessingtool;
+    exports abudu.test.testprocessingtool.controllers;
 }

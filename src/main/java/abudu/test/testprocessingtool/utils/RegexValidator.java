@@ -1,26 +1,14 @@
+
 package abudu.test.testprocessingtool.utils;
 
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-/**
- * RegexValidator is a utility class that provides methods for validating regex patterns.
- * It ensures that the regex patterns are syntactically correct and can be compiled by Java's regex engine.
- */
 public class RegexValidator {
 
-    // Private constructor to prevent instantiation
-    private RegexValidator() {
-        throw new UnsupportedOperationException("Utility class");
+    public RegexValidator() {
     }
 
-    /**
-     * Validates whether the given regex pattern is valid.
-     * It tries to compile the pattern and returns true if it's valid, false otherwise.
-     *
-     * @param regex The regex pattern to validate.
-     * @return True if the regex pattern is valid, false otherwise.
-     */
     public static boolean isValidRegex(String regex) {
         if (regex == null || regex.isEmpty()) {
             return false; // Null or empty regex is considered invalid
@@ -36,10 +24,12 @@ public class RegexValidator {
 
     public void validateInputs(String text, String regex) {
         if (text == null || text.isEmpty()) {
-            throw new IllegalArgumentException("Input text cannot be null or empty.");
+            AlertUtility.showErrorAlert("Validation Error", "Invalid Input Text", "Input text cannot be null or empty.");
+            return;
         }
         if (regex == null || regex.isEmpty()) {
-            throw new IllegalArgumentException("Regex pattern cannot be null or empty.");
+            AlertUtility.showErrorAlert("Validation Error", "Invalid Regex Pattern", "Regex pattern cannot be null or empty.");
+            return;
         }
     }
 }

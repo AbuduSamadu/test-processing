@@ -1,4 +1,4 @@
-/* src/main/resources/abudu/test/testprocessingtool/styles.css */
+
 
 .root {
     -fx-font-family: "Arial";
@@ -20,4 +20,30 @@
 
 .button:hover {
     -fx-background-color: #45a049;
+}
+
+#regexPatternField {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+
+}
+
+    #regexMatcherField {
+        -fx-background-color: #f0f0f0;
+        -fx-border-color: #ccc;
+        -fx-border-radius: 5px;
+        -fx-padding: 5px;
+        -fx-font-size: 14px;
+    }
+
+.amber-button {
+    -fx-background-color: #FFBF00; /* Amber color */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-weight: bold; /* Bold text */
+}
+.text-area {
+    -fx-font-size: 18px; /* Set the font size to 18px */
 }

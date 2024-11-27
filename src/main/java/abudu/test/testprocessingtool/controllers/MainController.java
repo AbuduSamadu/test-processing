@@ -1,15 +1,16 @@
 package abudu.test.testprocessingtool.controllers;
 
-import abudu.test.testprocessingtool.models.RegexProcessor;
-import abudu.test.testprocessingtool.models.TextProcessor;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+
 
 public class MainController {
 
+;
+
+
+    public TextField regexReplacerField;
     @FXML
     private TextArea textAreaInput;
 
@@ -19,12 +20,16 @@ public class MainController {
     @FXML
     private TextArea textAreaOutput;
 
-    private TextProcessingController textProcessingController;
+    private final TextProcessingController textProcessingController;
+    private final RegexProcessingController regexProcessingController;
 
-    public MainController() {
-        // Initialize the TextProcessingController with appropriate processors
+
+
+    public MainController( ) {
+        textProcessingController = new TextProcessingController();
+        regexProcessingController = new RegexProcessingController();
+
     }
-
     @FXML
     private void handleSearch() {
         String text = textAreaInput.getText();
@@ -37,8 +42,24 @@ public class MainController {
     private void handleReplace() {
         String text = textAreaInput.getText();
         String regex = regexPatternField.getText();
-        String replacement = ""; // You might want to add a TextField for replacement input in the FXML
+        String replacement = regexReplacerField.getText();
         String result = textProcessingController.handleReplace(text, regex, replacement);
+        textAreaOutput.setText(result);
+    }
+
+    @FXML
+    private void handleExactMatch() {
+        String text = textAreaInput.getText();
+        String regex = regexPatternField.getText();
+        String result = textProcessingController.handleExactMatch(text, regex);
+        textAreaOutput.setText(result);
+    }
+
+    @FXML
+    private void handleRegexValidation() {
+        String text = textAreaInput.getText();
+        String regex = regexPatternField.getText();
+        String result = regexProcessingController.handleRegexValidation(text, regex);
         textAreaOutput.setText(result);
     }
 

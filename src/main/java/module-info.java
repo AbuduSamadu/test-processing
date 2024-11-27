@@ -11,6 +11,7 @@ module abudu.test.testprocessingtool {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.logging;
+    requires annotations;
 
     opens abudu.test.testprocessingtool to javafx.fxml;
     opens abudu.test.testprocessingtool.controllers to javafx.fxml;

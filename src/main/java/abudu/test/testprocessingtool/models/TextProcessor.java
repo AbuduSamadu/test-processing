@@ -1,58 +1,30 @@
 package abudu.test.testprocessingtool.models;
 
-import abudu.test.testprocessingtool.utils.RegexValidator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import abudu.test.testprocessingtool.services.RegexService;
 
-/**
- * TextProcessor handles regex-based operations such as searching,
- * matching, and replacing text within a given string.
- */
 public class TextProcessor {
-    private final RegexValidator regexValidator;
+    private final RegexService regexService;
 
     /**
-     * Constructor initializes the TextProcessor with a RegexValidator instance.
+     * Constructor initializes the TextProcessor with a RegexService instance.
      */
-    public TextProcessor(RegexValidator regexValidator) {
-        this.regexValidator = regexValidator;
+    public TextProcessor(RegexService regexService) {
+        this.regexService = regexService;
     }
 
     public String search(String text, String regex) {
-        regexValidator.validateInputs(text, regex);
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(text);
-
-        StringBuilder results = new StringBuilder();
-        int matchCount = 0;
-
-        while (matcher.find()) {
-            results.append("Match ").append(++matchCount)
-                    .append(": ").append(matcher.group())
-                    .append(" at index ").append(matcher.start()).append("\n");
-        }
-
-        return matchCount > 0 ? results.toString() : "No matches found.";
+        regexService.validateRegex(regex);
+        return String.join("\n", regexService.findAllMatches(text, regex));
     }
 
-    /**
-     * Replaces all occurrences of the regex pattern in the input text with the replacement string.
-     *
-     * @param text        The input text to process.
-     * @param regex       The regex pattern to match.
-     * @param replacement The string to replace matches with.
-     * @return The modified text after replacement.
-     */
     public String replace(String text, String regex, String replacement) {
-        regexValidator.validateInputs(text, regex);
-        if (replacement == null) {
-            throw new IllegalArgumentException("Replacement string cannot be null.");
-        }
-
-        return text.replaceAll(regex, replacement);
+        regexService.validateRegex(regex);
+        return regexService.replaceAllMatches(text, regex, replacement);
     }
 
-
-
+    public String exactMatch(String text, String regex) {
+        regexService.validateRegex(regex);
+        return regexService.isExactMatch(text, regex) ? "The text matches the regex pattern." : "The text does not match the regex pattern.";
+    }
 }

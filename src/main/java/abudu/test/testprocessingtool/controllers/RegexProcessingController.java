@@ -6,18 +6,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
-/**
- * RegexProcessingController handles user interactions with regex-related functionality
- * such as validating, matching, finding all matches, and replacing patterns in text.
- */
 public class RegexProcessingController {
 
-    RegexProcessor regexProcessor;
+    private final RegexProcessor regexProcessor;
 
     public RegexProcessingController() {
+        this.regexProcessor = new RegexProcessor(new RegexValidator());
     }
-
-
 
     @NotNull
     static String getString(String text, String regex, RegexProcessor regexProcessor) {
@@ -33,10 +28,19 @@ public class RegexProcessingController {
         }
     }
 
-
-
-
     public String handleRegexValidation(String text, String regex) {
         return RegexValidator.isValidRegex(regex) ? "Valid regex pattern." : "Invalid regex pattern.";
+    }
+
+    public String[] findAllMatches(String text, String regex) {
+        return regexProcessor.findAllMatches(text, regex);
+    }
+
+    public boolean matches(String text, String regex) {
+        return regexProcessor.matches(text, regex);
+    }
+
+    public String replaceAll(String text, String regex, String replacement) {
+        return regexProcessor.replaceAll(text, regex, replacement);
     }
 }

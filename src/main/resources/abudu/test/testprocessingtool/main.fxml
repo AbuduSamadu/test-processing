@@ -28,7 +28,7 @@
                 <Button text="Import" onAction="#handleImport" />
             </HBox>
             <TextArea fx:id="textAreaInput"  promptText="Enter your text here..." wrapText="true" prefHeight="150" />
-            <TextFlow fx:id="textFlowOutput" prefHeight="150" />
+            <TextFlow fx:id="textFlowOutput" styleClass="text-flow" prefHeight="150"  />
         </VBox>
 
         <!-- Regex Pattern Input -->

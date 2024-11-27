@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
@@ -22,8 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 
 public class MainController {
@@ -83,29 +81,21 @@ public class MainController {
 
     private void highlightText(String text, String regex) {
         textFlowOutput.getChildren().clear();
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(text);
+        String[] matches = regexProcessingController.findAllMatches(text, regex);
         int lastEnd = 0;
-        while (matcher.find()) {
-            if (matcher.start() > lastEnd) {
-                textFlowOutput.getChildren().add(new Text(text.substring(lastEnd, matcher.start())));
+        for (String match : matches) {
+            int start = text.indexOf(match, lastEnd);
+            if (start > lastEnd) {
+                textFlowOutput.getChildren().add(new Text(text.substring(lastEnd, start)));
             }
-            Text highlightedText = new Text(text.substring(matcher.start(), matcher.end()));
-            highlightedText.setStyle("-fx-fill: yellow; -fx-font-weight: bold;");
+            Text highlightedText = new Text(match);
+            highlightedText.setStyle("-fx-fill: red; -fx-font-weight: bold;");
             textFlowOutput.getChildren().add(highlightedText);
-            lastEnd = matcher.end();
+            lastEnd = start + match.length();
         }
         if (lastEnd < text.length()) {
             textFlowOutput.getChildren().add(new Text(text.substring(lastEnd)));
         }
-    }
-
-    @FXML
-    private void handleRegexValidation() {
-        String text = textAreaInput.getText();
-        String regex = regexPatternField.getText();
-        String result = regexProcessingController.handleRegexValidation(text, regex);
-        textAreaOutput.setText(result);
     }
 
     @FXML

@@ -24,17 +24,17 @@ public class DataManagementService {
 
     }
 
-
+    // Add a new data item to the collection
     public boolean addDataItem(DataItem item) {
         if (findById(item.getId()).isPresent()) {
             AlertUtility.showErrorAlert("Error", "Item already exists.", "Please provide a unique item ID.");
             return false;
         }
         dataItems.add(item);
-        return false;
+        return true;
     }
 
-
+    // Update an existing data item in the collection
     public boolean updateDataItem(DataItem item) {
         Optional<DataItem> existingItem = findById(item.getId());
         if (existingItem.isEmpty()) {
@@ -43,7 +43,7 @@ public class DataManagementService {
         }
         existingItem.get().setName(item.getName());
         existingItem.get().setValue(item.getValue());
-        return false;
+        return true;
     }
 
     /**
@@ -59,7 +59,7 @@ public class DataManagementService {
             return false;
         }
         dataItems.remove(item.get());
-        return false;
+        return true;
     }
 
     /**

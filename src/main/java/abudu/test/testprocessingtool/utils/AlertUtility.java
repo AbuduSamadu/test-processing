@@ -7,11 +7,12 @@ import javafx.scene.control.ButtonType;
 
 
 public class AlertUtility {
-
+    // Show an alert with the specified title, header, and message
     public static void showInfoAlert(String title, String header, String message) {
         showAlert(AlertType.INFORMATION, title, header, message);
     }
 
+    // Show an alert with the specified title, header, and message, and an additional button
     public static void showWarningAlert(String title, String header, String message) {
         showAlert(AlertType.WARNING, title, header, message);
     }
@@ -20,7 +21,7 @@ public class AlertUtility {
         showAlert(AlertType.ERROR, title, header, message);
     }
 
-
+    // Show an alert with the specified type, title, header, and message
     private static void showAlert(AlertType alertType, String title, String header, String message) {
         Alert alert = new Alert(alertType, message, ButtonType.OK);
         alert.setTitle(title);

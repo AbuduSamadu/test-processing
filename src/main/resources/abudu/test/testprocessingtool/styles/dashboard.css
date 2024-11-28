@@ -19,8 +19,8 @@
 
 /* TextField styles */
 .text-field {
-    -fx-pref-width: 200px;
-    -fx-pref-height: 50px;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 30px;
 }
 
 /* Button styles */
@@ -37,10 +37,7 @@
     -fx-background-color: #005a9e;
 }
 
-.amber-button {
-    -fx-background-color: #ffbf00;
-    -fx-text-fill: black;
-}
+
 
 .amber-button:hover {
     -fx-background-color: #e6ac00;
@@ -72,8 +69,8 @@
 
 /* GridPane styles */
 .grid-pane {
-    -fx-hgap: 10px;
-    -fx-vgap: 10px;
+    -fx-hgap: 8px;
+    -fx-vgap: 8px;
     -fx-alignment: CENTER;
 }
 
@@ -87,4 +84,10 @@
 .vbox {
     -fx-spacing: 8px;
     -fx-alignment: CENTER;
+}
+
+.amber-button {
+    -fx-background-color: #FFBF00; /* Amber color */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-weight: bold; /* Bold text */
 }

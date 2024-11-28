@@ -4,14 +4,24 @@ import abudu.test.testprocessingtool.models.DataItem;
 import abudu.test.testprocessingtool.services.DataManagementService;
 import abudu.test.testprocessingtool.utils.AlertUtility;
 import abudu.test.testprocessingtool.utils.CollectionManager;
+import abudu.test.testprocessingtool.utils.LoggerUtility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 /**
  * Controller for managing data items using JavaFX.
@@ -19,6 +29,11 @@ import java.util.Map;
  */
 public class DataManagementController {
 
+
+    public ToggleButton toggleButton;
+    public Label titleLabel;
+    public Button updateItemButton;
+    public Button deleteItemButton;
     @FXML
     private TextField itemIdField;
 
@@ -31,11 +46,6 @@ public class DataManagementController {
     @FXML
     private Button addItemButton;
 
-    @FXML
-    private Button updateItemButton;
-
-    @FXML
-    private Button deleteItemButton;
 
     @FXML
     private TableView<DataItem> dataTable;
@@ -186,31 +196,58 @@ public class DataManagementController {
         dataTable.setItems(FXCollections.observableArrayList(sortedItems));
     }
 
-    /**
-     * Groups data items by value.
-     */
+
     @FXML
-    public void handleGroupByValue() {
-        Map<String, List<DataItem>> groupedItems = CollectionManager.groupByValue(observableDataList);
-        // Process the grouped items as needed
+    public void handleImport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Text File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                new FileChooser.ExtensionFilter("All Files", "*.*")
+        );
+
+        Stage stage = (Stage) addItemButton.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            try {
+                String content = new String(Files.readAllBytes(Paths.get(selectedFile.toURI())));
+                // Process the content as needed, for example, parse and add to the table
+                // Example: parse the content and add items to the observableDataList
+                String[] lines = content.split("\n");
+                for (String line : lines) {
+                    String[] parts = line.split(",");
+                    if (parts.length == 3) {
+                        DataItem newItem = new DataItem(parts[0], parts[1], parts[2]);
+                        if (dataManagementService.addDataItem(newItem)) {
+                            observableDataList.add(newItem);
+                        } else {
+                            AlertUtility.showErrorAlert("Error", "An item with the same ID already exists.", "Please use a different ID.");
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                LoggerUtility.logError(e);
+                AlertUtility.showErrorAlert("File Error", "Could not read file", "An error occurred while reading the file.");
+            }
+        }
     }
 
-    /**
-     * Finds duplicate data items by ID.
-     */
     @FXML
-    public void handleFindDuplicates() {
-        List<DataItem> duplicates = CollectionManager.findDuplicatesById(observableDataList);
-        dataTable.setItems(FXCollections.observableArrayList(duplicates));
+    private void handleToggle() {
+        if (toggleButton.isSelected()) {
+            try {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/abudu/test/testprocessingtool/main.fxml")));
+                Stage stage = (Stage) toggleButton.getScene().getWindow();
+                stage.setScene(new Scene(root, 800, 600));
+                stage.setTitle("Data Management Dashboard");
+            } catch (IOException e) {
+                LoggerUtility.logError(e);
+            }
+        } else {
+            titleLabel.setText("Data Management Dashboard");
+            toggleButton.setText("Switch to Text Processing Tool");
+        }
     }
 
-    /**
-     * Removes data items by value.
-     */
-    @FXML
-    public void handleRemoveByValue() {
-        String value = itemValueField.getText();
-        List<DataItem> updatedItems = CollectionManager.removeByValue(observableDataList, value);
-        observableDataList.setAll(updatedItems);
-    }
 }

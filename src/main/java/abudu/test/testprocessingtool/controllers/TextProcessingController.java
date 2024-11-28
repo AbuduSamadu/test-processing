@@ -26,7 +26,7 @@ public class TextProcessingController {
 
 
 
-
+    // Implement the remaining methods as per the given requirements
     public String handleSearch(String text, String regex) {
         if (!RegexValidator.isValidRegex(regex)) {
             return "Invalid regex pattern.";
@@ -36,6 +36,7 @@ public class TextProcessingController {
         return "Search: " + regex + ", Occurrences: " + count;
     }
 
+    // Handle the replace operation
     public String handleReplace(String text, String regex, String replacement) {
         if (!RegexValidator.isValidRegex(regex)) {
             return "Invalid regex pattern.";
@@ -47,7 +48,7 @@ public class TextProcessingController {
         }
     }
 
-
+// Handle the exact match operation
     public String handleExactMatch(String text, String regex) {
         if (!RegexValidator.isValidRegex(regex)) {
             return "Invalid regex pattern.";

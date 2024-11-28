@@ -8,12 +8,17 @@ import java.util.Arrays;
 
 public class RegexProcessingController {
 
+    // Create an instance of the RegexProcessor
     private final RegexProcessor regexProcessor;
 
+
+     // Initialize the RegexProcessingController
     public RegexProcessingController() {
         this.regexProcessor = new RegexProcessor(new RegexValidator());
     }
 
+
+    // Handle the regex processing operation
     @NotNull
     static String getString(String text, String regex, RegexProcessor regexProcessor) {
         if (!RegexValidator.isValidRegex(regex)) {

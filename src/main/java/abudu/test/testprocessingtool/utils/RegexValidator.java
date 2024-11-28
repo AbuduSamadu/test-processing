@@ -8,7 +8,7 @@ public class RegexValidator {
 
     public RegexValidator() {
     }
-
+    // Validate the regex pattern
     public static boolean isValidRegex(String regex) {
         if (regex == null || regex.isEmpty()) {
             return false; // Null or empty regex is considered invalid
@@ -21,7 +21,7 @@ public class RegexValidator {
             return false; // If there's a syntax error, the regex is invalid
         }
     }
-
+    // Validate the inputs to the methods
     public void validateInputs(String text, String regex) {
         if (text == null || text.isEmpty()) {
             AlertUtility.showErrorAlert("Validation Error", "Invalid Input Text", "Input text cannot be null or empty.");

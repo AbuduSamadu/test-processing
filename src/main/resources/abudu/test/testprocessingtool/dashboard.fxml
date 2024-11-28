@@ -9,9 +9,10 @@
     <!-- Top Section: Title -->
     <top>
         <Label text="Data Management Tool" style="-fx-font-size: 20px; -fx-font-weight: bold;" alignment="CENTER" />
+        <Button text="Import" onAction="#handleImport" />
     </top>
-
     <!-- Center Section: Data Table -->
+    <ToggleButton text="text processing tool" onAction="#handleToggle" fx:id="toggleButton" />
     <center>
         <VBox spacing="10" alignment="CENTER" >
             <TableView fx:id="dataTable" prefHeight="300" prefWidth="500" onMouseClicked="#handleRowSelection">
@@ -27,7 +28,7 @@
     <!-- Bottom Section: Controls -->
     <bottom>
         <VBox spacing="10" alignment="CENTER" >
-            <GridPane hgap="10" vgap="10" alignment="CENTER">
+            <GridPane hgap="8" vgap="8" alignment="CENTER">
                 <Label text="ID:" />
                 <TextField fx:id="itemIdField" GridPane.columnIndex="1" />
 
@@ -42,12 +43,9 @@
                 <Button text="Add" fx:id="addItemButton" onAction="#handleAddItem" />
                 <Button text="Update" fx:id="updateItemButton" onAction="#handleUpdateItem" />
                 <Button text="Delete" fx:id="deleteItemButton" onAction="#handleDeleteItem" />
-                <Button text="Clear" onAction="#clearFields" />
                 <Button text="Filter" onAction="#handleFilterByKeyword" />
                 <Button text="Sort" onAction="#handleSortByName" />
-                <Button text="Group" onAction="#handleGroupByValue" />
-                <Button text="Find Duplicates" onAction="#handleFindDuplicates" />
-                <Button text="Remove by Value" onAction="#handleRemoveByValue" />
+                <Button text="Clear" onAction="#clearFields" styleClass="amber-button"/>
             </HBox>
         </VBox>
     </bottom>

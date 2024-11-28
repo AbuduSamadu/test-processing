@@ -42,17 +42,19 @@ public class MainController {
     @FXML
     private TextFlow textFlowOutput;
 
-
+    // Create instances of the TextProcessingController and RegexProcessingController
     private final TextProcessingController textProcessingController;
     private final RegexProcessingController regexProcessingController;
 
 
-
+    // Initialize the controllers
     public MainController( ) {
         textProcessingController = new TextProcessingController();
         regexProcessingController = new RegexProcessingController();
 
     }
+
+    // Handle the search operation
     @FXML
     private void handleSearch() {
         String text = textAreaInput.getText();
@@ -61,7 +63,7 @@ public class MainController {
         textAreaOutput.setText(result);
 
     }
-
+    // Handle the replace operation
     @FXML
     private void handleReplace() {
         String text = textAreaInput.getText();
@@ -72,6 +74,7 @@ public class MainController {
 
     }
 
+        // Handle the exact match operation
     @FXML
     private void handleExactMatch() {
         String text = textAreaInput.getText();
@@ -81,6 +84,7 @@ public class MainController {
 
     }
 
+        // Highlight the text with the specified regex
     private void highlightText(String text, String regex) {
         textFlowOutput.getChildren().clear();
         String[] matches = regexProcessingController.findAllMatches(text, regex);
@@ -100,6 +104,7 @@ public class MainController {
         }
     }
 
+    // Handle the clear operation
     @FXML
     private void handleClear() {
         textAreaInput.clear();
@@ -108,7 +113,7 @@ public class MainController {
 
     }
 
-
+    // Handle the toggle operation
     @FXML
     private void handleToggle() {
         if (toggleButton.isSelected()) {
@@ -126,6 +131,7 @@ public class MainController {
         }
     }
 
+    // Handle the import operation
     @FXML
     public void handleImport(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();

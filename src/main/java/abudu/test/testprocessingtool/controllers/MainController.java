@@ -59,7 +59,7 @@ public class MainController {
         String regex = regexPatternField.getText();
         String result = textProcessingController.handleSearch(text, regex);
         textAreaOutput.setText(result);
-        highlightText(text, regex);
+
     }
 
     @FXML
@@ -68,6 +68,8 @@ public class MainController {
         String regex = regexPatternField.getText();
         String replacement = regexReplacerField.getText();
         String result = textProcessingController.handleReplace(text, regex, replacement);
+        textAreaOutput.setText(result);
+
     }
 
     @FXML
@@ -76,7 +78,7 @@ public class MainController {
         String regex = regexPatternField.getText();
         String result = textProcessingController.handleExactMatch(text, regex);
         textAreaOutput.setText(result);
-        highlightText(text, regex);
+
     }
 
     private void highlightText(String text, String regex) {
@@ -103,6 +105,7 @@ public class MainController {
         textAreaInput.clear();
         regexPatternField.clear();
         textAreaOutput.clear();
+
     }
 
 

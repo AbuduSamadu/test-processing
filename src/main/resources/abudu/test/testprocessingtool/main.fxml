@@ -28,15 +28,14 @@
                 <Button text="Import" onAction="#handleImport" />
             </HBox>
             <TextArea fx:id="textAreaInput"  promptText="Enter your text here..." wrapText="true" prefHeight="150" />
-            <TextFlow fx:id="textFlowOutput" styleClass="text-flow" prefHeight="150"  />
         </VBox>
 
         <!-- Regex Pattern Input -->
         <VBox spacing="10">
             <Label text="Regex Pattern:" />
             <TextField fx:id="regexPatternField" promptText="Enter regex pattern..." prefWidth="300" prefHeight="50"/>
-            <Label text="Regex Matcher:" />
-            <TextField fx:id="regexReplacerField" promptText="Enter regex matcher..." prefWidth="300" prefHeight="50" />
+            <Label text="Regex Replacer:" />
+            <TextField fx:id="regexReplacerField" promptText="Enter regex replacer..." prefWidth="300" prefHeight="50" />
         </VBox>
 
         <!-- Buttons for actions -->

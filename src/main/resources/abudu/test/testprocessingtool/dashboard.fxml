@@ -2,7 +2,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="abudu.test.testprocessingtool.controllers.DataManagementController">
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="abudu.test.testprocessingtool.controllers.DataManagementController"
+            stylesheets="@styles/dashboard.css"
+>
     <!-- Top Section: Title -->
     <top>
         <Label text="Data Management Tool" style="-fx-font-size: 20px; -fx-font-weight: bold;" alignment="CENTER" />

@@ -49,11 +49,11 @@ public class TextProcessingController {
     }
 
 // Handle the exact match operation
-    public String handleExactMatch(String text, String regex) {
-        if (!RegexValidator.isValidRegex(regex)) {
-            return "Invalid regex pattern.";
-        }
-        return textProcessor.exactMatch(text, regex);
+public String handleExactMatch(String text, String regex) {
+    if (!RegexValidator.isValidRegex(regex)) {
+        return "Invalid regex pattern.";
     }
+    return textProcessor.exactMatch(text, regex);
+}
 
 }

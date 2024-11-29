@@ -28,11 +28,12 @@ public class RegexService {
     }
 
     // Check if the text matches the specified regex pattern
-    public boolean isExactMatch(String text, String regex) {
+    public String isExactMatch(String text, String regex) {
         if (validateRegex(regex)) {
             throw new IllegalArgumentException("Invalid regex pattern.");
         }
-        return regexProcessor.matches(text, regex);
+        String[] matches = regexProcessor.findAllMatches(text, regex);
+        return matches.length > 0 ? String.join(", ", matches) : "The text does not match the regex pattern.";
     }
 
     // Replace all matches in the text using the specified regex pattern and replacement

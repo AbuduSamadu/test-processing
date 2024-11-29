@@ -25,6 +25,6 @@ public class TextProcessor {
 
     public String exactMatch(String text, String regex) {
         regexService.validateRegex(regex);
-        return regexService.isExactMatch(text, regex) ? "The text matches the regex pattern." : "The text does not match the regex pattern.";
+        return regexService.isExactMatch(text, regex);
     }
 }

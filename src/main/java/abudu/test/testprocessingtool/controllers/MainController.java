@@ -57,8 +57,8 @@ public class MainController {
     // Handle the search operation
     @FXML
     private void handleSearch() {
-        String text = textAreaInput.getText();
-        String regex = regexPatternField.getText();
+        String text = textAreaInput.getText().trim();
+        String regex = regexPatternField.getText().trim();
         String result = textProcessingController.handleSearch(text, regex);
         textAreaOutput.setText(result);
 
@@ -66,9 +66,9 @@ public class MainController {
     // Handle the replace operation
     @FXML
     private void handleReplace() {
-        String text = textAreaInput.getText();
-        String regex = regexPatternField.getText();
-        String replacement = regexReplacerField.getText();
+        String text = textAreaInput.getText().trim();
+        String regex = regexPatternField.getText().trim();
+        String replacement = regexReplacerField.getText().trim();
         String result = textProcessingController.handleReplace(text, regex, replacement);
         textAreaOutput.setText(result);
 
@@ -77,8 +77,8 @@ public class MainController {
         // Handle the exact match operation
     @FXML
     private void handleExactMatch() {
-        String text = textAreaInput.getText();
-        String regex = regexPatternField.getText();
+        String text = textAreaInput.getText().trim();
+        String regex = regexPatternField.getText().trim();
         String result = textProcessingController.handleExactMatch(text, regex);
         textAreaOutput.setText(result);
 
@@ -95,7 +95,7 @@ public class MainController {
                 textFlowOutput.getChildren().add(new Text(text.substring(lastEnd, start)));
             }
             Text highlightedText = new Text(match);
-            highlightedText.setStyle("-fx-fill: red; -fx-font-weight: bold;");
+            highlightedText.setStyle("-fx-fill: #d10533; -fx-font-weight: bold;");
             textFlowOutput.getChildren().add(highlightedText);
             lastEnd = start + match.length();
         }

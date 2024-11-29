@@ -29,7 +29,6 @@ public class RegexValidator {
         }
         if (regex == null || regex.isEmpty()) {
             AlertUtility.showErrorAlert("Validation Error", "Invalid Regex Pattern", "Regex pattern cannot be null or empty.");
-            return;
         }
     }
 }

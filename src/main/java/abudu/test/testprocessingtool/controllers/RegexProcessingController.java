@@ -1,7 +1,7 @@
 package abudu.test.testprocessingtool.controllers;
 
 import abudu.test.testprocessingtool.models.RegexProcessor;
-import abudu.test.testprocessingtool.utils.RegexValidator;
+import abudu.test.testprocessingtool.utils.Validator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -14,14 +14,14 @@ public class RegexProcessingController {
 
      // Initialize the RegexProcessingController
     public RegexProcessingController() {
-        this.regexProcessor = new RegexProcessor(new RegexValidator());
+        this.regexProcessor = new RegexProcessor(new Validator());
     }
 
 
     // Handle the regex processing operation
     @NotNull
     static String getString(String text, String regex, RegexProcessor regexProcessor) {
-        if (!RegexValidator.isValidRegex(regex)) {
+        if (!Validator.isValidRegex(regex)) {
             return "Invalid regex pattern.";
         }
 
@@ -34,7 +34,7 @@ public class RegexProcessingController {
     }
 
     public String handleRegexValidation(String text, String regex) {
-        return RegexValidator.isValidRegex(regex) ? "Valid regex pattern." : "Invalid regex pattern.";
+        return Validator.isValidRegex(regex) ? "Valid regex pattern." : "Invalid regex pattern.";
     }
 
     public String[] findAllMatches(String text, String regex) {

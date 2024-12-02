@@ -1,7 +1,7 @@
 package abudu.test.testprocessingtool.services;
 
 import abudu.test.testprocessingtool.models.RegexProcessor;
-import abudu.test.testprocessingtool.utils.RegexValidator;
+import abudu.test.testprocessingtool.utils.Validator;
 
 
 public class RegexService {
@@ -16,7 +16,7 @@ public class RegexService {
 
     // Validate the regex pattern
     public boolean validateRegex(String regex) {
-        return !RegexValidator.isValidRegex(regex);
+        return !Validator.isValidRegex(regex);
     }
 
     // Find all matches in the text using the specified regex pattern

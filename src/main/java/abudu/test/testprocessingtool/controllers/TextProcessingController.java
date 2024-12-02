@@ -3,7 +3,7 @@ package abudu.test.testprocessingtool.controllers;
 import abudu.test.testprocessingtool.models.TextProcessor;
 import abudu.test.testprocessingtool.models.RegexProcessor;
 import abudu.test.testprocessingtool.services.RegexService;
-import abudu.test.testprocessingtool.utils.RegexValidator;
+import abudu.test.testprocessingtool.utils.Validator;
 
 
 /**
@@ -18,17 +18,17 @@ public class TextProcessingController {
      * Constructor initializes the controller with instances of TextProcessor and RegexProcessor.
      */
     public TextProcessingController(){
-        RegexValidator regexValidator = new RegexValidator();
-        RegexService regexService = new RegexService(new RegexProcessor(regexValidator));
+        Validator validator = new Validator();
+        RegexService regexService = new RegexService(new RegexProcessor(validator));
         this.textProcessor = new TextProcessor(regexService);
-        this.regexProcessor = new RegexProcessor(regexValidator);
+        this.regexProcessor = new RegexProcessor(validator);
     }
 
 
 
     // Implement the remaining methods as per the given requirements
     public String handleSearch(String text, String regex) {
-        if (!RegexValidator.isValidRegex(regex)) {
+        if (!Validator.isValidRegex(regex)) {
             return "Invalid regex pattern.";
         }
         String[] matches = textProcessor.search(text, regex).split("\n");
@@ -38,7 +38,7 @@ public class TextProcessingController {
 
     // Handle the replace operation
     public String handleReplace(String text, String regex, String replacement) {
-        if (!RegexValidator.isValidRegex(regex)) {
+        if (!Validator.isValidRegex(regex)) {
             return "Invalid regex pattern.";
         }
         try {
@@ -50,7 +50,7 @@ public class TextProcessingController {
 
 // Handle the exact match operation
 public String handleExactMatch(String text, String regex) {
-    if (!RegexValidator.isValidRegex(regex)) {
+    if (!Validator.isValidRegex(regex)) {
         return "Invalid regex pattern.";
     }
     return textProcessor.exactMatch(text, regex);

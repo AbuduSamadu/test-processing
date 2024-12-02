@@ -4,9 +4,9 @@ package abudu.test.testprocessingtool.utils;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class RegexValidator {
+public class Validator {
 
-    public RegexValidator() {
+    public Validator() {
     }
     // Validate the regex pattern
     public static boolean isValidRegex(String regex) {
